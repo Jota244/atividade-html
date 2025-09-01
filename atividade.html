@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Atividade - Beatles e Estruturas HTML</title>
+</head>
+<body>
+
+    <!-- 1) Página base e navegação -->
+    <header>
+        <h1>Atividade de HTML</h1>
+        <nav>
+            <ul>
+                <li><a href="#listas">Listas</a></li>
+                <li><a href="#imagens">Imagens</a></li>
+                <li><a href="#tabelas">Tabelas</a></li>
+                <li><a href="sobre.html">Sobre (relativo)</a></li>
+                <li><a href="https://github.com/?locale=pt-br" target="_blank">Site oficial dos Beatles (absoluto)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- 2) Listas -->
+        <section id="listas">
+            <h2>Listas</h2>
+
+            <h3>Lista não ordenada (5 itens)</h3>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>Spring Boot</li>
+                <li>Java</li>
+            </ul>
+
+            <h3>Lista ordenada (5 passos)</h3>
+            <ol>
+                <li>Abrir o navegador</li>
+                <li>Acessar o GitHub</li>
+                <li>Criar repositório</li>
+                <li>Enviar arquivos</li>
+                <li>Compartilhar link</li>
+            </ol>
+
+            <h3>Lista de definição (3 termos)</h3>
+            <dl>
+                <dt>HTML</dt>
+                <dd>Linguagem de marcação para estruturar páginas web.</dd>
+                <dt>CSS</dt>
+                <dd>Folhas de estilo em cascata, para aparência visual.</dd>
+                <dt>JavaScript</dt>
+                <dd>Linguagem de programação usada para interatividade.</dd>
+            </dl>
+        </section>
+
+        <!-- 3) Imagens -->
+        <section id="imagens">
+            <h2>Imagens com acessibilidade</h2>
+            <figure>
+                <img src="img/imagem 1.jpeg" alt="Foto dos Beatles" width="250">
+            </figure>
+
+        <!-- 4) Tabela simples -->
+        <section id="tabelas">
+            <h2>Tabelas</h2>
+
+            <h3>Tabela simples – Educação Profissional (Brasil x SC)</h3>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <caption>Educação Profissional (Brasil x SC)</caption>
+                <thead>
+                    <tr>
+                        <th>Brasil</th>
+                        <th>Santa Catarina</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1.741.528 (2014)</td>
+                        <td>67.325 (2014)</td>
+                    </tr>
+                    <tr>
+                        <td>Novas matrículas: 11,7% (2014)</td>
+                        <td>Novas matrículas: 3,1% (2014)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 5) Tabela avançada -->
+            <h3>Tabela avançada – IDEB (2013/2015/2017)</h3>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <caption>Índice de Desenvolvimento da Educação Básica</caption>
+                <thead>
+                    <tr>
+                        <th>Ano</th>
+                        <th>Brasil (anos iniciais)</th>
+                        <th>SC (anos iniciais)</th>
+                        <th>Brasil (anos finais)</th>
+                        <th>SC (anos finais)</th>
+                        <th>Brasil (ensino médio)</th>
+                        <th>SC (ensino médio)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2013</td>
+                        <td>4,7</td>
+                        <td>5,5</td>
+                        <td>4,4</td>
+                        <td>5,1</td>
+                        <td>3,9</td>
+                        <td>4,4</td>
+                    </tr>
+                    <tr>
+                        <td>2015</td>
+                        <td>5,2</td>
+                        <td>5,8</td>
+                        <td>4,7</td>
+                        <td>5,5</td>
+                        <td>4,3</td>
+                        <td>4,7</td>
+                    </tr>
+                    <tr>
+                        <td>2017</td>
+                        <td>5,5</td>
+                        <td>6,0</td>
+                        <td>5,0</td>
+                        <td>5,7</td>
+                        <td>4,7</td>
+                        <td>5,2</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 6) Tabela com imagens -->
+        <section>
+            <h3>Discografia dos Beatles</h3>
+            <table border="1" cellpadding="5" cellspacing="0">
+                <caption>Álbuns dos Beatles</caption>
+                <thead>
+                    <tr>
+                        <th>Álbum</th>
+                        <th>Ano</th>
+                        <th>Capa</th>
+                        <th>Observações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Abbey Road</td>
+                        <td>1969</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg" alt="Abbey Road" width="100">
+                                <figcaption>Abbey Road</figcaption>
+                            </figure>
+                        </td>
+                        <td>Último álbum gravado pelos Beatles.</td>
+                    </tr>
+                    <tr>
+                        <td>Let It Be</td>
+                        <td>1970</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/2/25/LetItBe.jpg" alt="Let It Be" width="100">
+                                <figcaption>Let It Be</figcaption>
+                            </figure>
+                        </td>
+                        <td>Lançado após a separação da banda.</td>
+                    </tr>
+                    <tr>
+                        <td>Revolver</td>
+                        <td>1966</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/1/16/Revolver.jpg" alt="Revolver" width="100">
+                                <figcaption>Revolver</figcaption>
+                            </figure>
+                        </td>
+                        <td>Considerado um dos álbuns mais influentes.</td>
+                    </tr>
+                    <tr>
+                        <td>Sgt. Pepper's Lonely Hearts Club Band</td>
+                        <td>1967</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/3/3b/Sgt._Pepper%27s_Lonely_Hearts_Club_Band.jpg" alt="Sgt. Pepper" width="100">
+                                <figcaption>Sgt. Pepper's</figcaption>
+                            </figure>
+                        </td>
+                        <td>Álbum revolucionário na música pop.</td>
+                    </tr>
+                    <tr>
+                        <td>Rubber Soul</td>
+                        <td>1965</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/7/74/Rubber_Soul.jpg" alt="Rubber Soul" width="100">
+                                <figcaption>Rubber Soul</figcaption>
+                            </figure>
+                        </td>
+                        <td>Transição para um estilo mais maduro.</td>
+                    </tr>
+                    <tr>
+                        <td>Magical Mystery Tour</td>
+                        <td>1967</td>
+                        <td>
+                            <figure>
+                                <img src="https://upload.wikimedia.org/wikipedia/en/e/e6/MagicalMysteryTourDoubleEPcover.jpg" alt="Magical Mystery Tour" width="100">
+                                <figcaption>Magical Mystery Tour</figcaption>
+                            </figure>
+                        </td>
+                        <td>Trilha sonora do filme de mesmo nome.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- 7) Página temática -->
+        <section>
+            <h2>Página Temática – Beatles</h2>
+            <nav>
+                <ul>
+                    <li><a href="#historia">História</a></li>
+                    <li><a href="#albuns">Álbuns</a></li>
+                </ul>
+            </nav>
+            <article id="historia">
+                <h3>História</h3>
+                <p>Os Beatles foram uma banda de rock inglesa formada em Liverpool em 1960. O grupo era composto por John Lennon, Paul McCartney, George Harrison e Ringo Starr.</p>
+                <p>São considerados a banda mais influente da história da música popular, revolucionando a indústria fonográfica.</p>
+                <figure>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/The_Fabs.JPG" alt="The Beatles tocando" width="250">
+                    <figcaption>Os Beatles em apresentação ao vivo</figcaption>
+                </figure>
+            </article>
+            <article id="albuns">
+                <h3>Álbuns</h3>
+                <p>A discografia dos Beatles contém diversos álbuns icônicos, incluindo <b>Abbey Road</b>, <i>Revolver</i> e <u>Let It Be</u>.</p>
+            </article>
+        </section>
+
+        <!-- 9) Caminhos relativos e absolutos -->
+        <section>
+            <h2>Caminhos relativos e absolutos</h2>
+            <p>Um caminho <b>relativo</b> depende da localização do arquivo. Exemplo: <code>imagens/beatles1.jpg</code>.</p>
+            <p>Um caminho <b>absoluto</b> aponta para a URL completa. Exemplo: 
+                <a href="https://upload.wikimedia.org/wikipedia/en/4/42/Beatles_-_Abbey_Road.jpg">Imagem Abbey Road</a>.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2025 - Direitos autorais do aluno. Nome: Guilherme</p>
+    </footer>
+
+</body>
+</html>
