@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário Completo de Contato</title>
+</head>
+<body>
+    <h1>Formulário de Contato e Cadastro</h1>
+    
+    <form action="#" method="post" enctype="multipart/form-data">
+        
+        <!-- 1) Formulário de Contato Básico -->
+        <fieldset>
+            <legend>Informações Básicas de Contato</legend>
+            
+            <div>
+                <label for="nome">Nome Completo:</label>
+                <input type="text" id="nome" name="nome" required minlength="2" maxlength="100" 
+                       title="Digite seu nome completo">
+            </div>
+            
+            <div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required 
+                       title="Digite um e-mail válido">
+            </div>
+            
+            <div>
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" rows="4" cols="50" required 
+                          minlength="10" maxlength="500" 
+                          title="Digite sua mensagem (mínimo 10 caracteres)"></textarea>
+            </div>
+        </fieldset>
+
+        <!-- 2) Campos obrigatórios e tipos de input -->
+        <fieldset>
+            <legend>Informações Adicionais</legend>
+            
+            <div>
+                <label for="telefone">Telefone:</label>
+                <input type="tel" id="telefone" name="telefone" required 
+                       pattern="\([0-9]{2}\) [0-9]{5}-[0-9]{4}" 
+                       placeholder="(XX) XXXXX-XXXX"
+                       title="Digite o telefone no formato (XX) XXXXX-XXXX">
+            </div>
+            
+            <div>
+                <label for="idade">Idade:</label>
+                <input type="number" id="idade" name="idade" required min="1" max="120" 
+                       title="Digite sua idade">
+            </div>
+            
+            <div>
+                <label for="site">Site Pessoal:</label>
+                <input type="url" id="site" name="site" 
+                       placeholder="https://www.exemplo.com"
+                       title="Digite a URL do seu site pessoal">
+            </div>
+        </fieldset>
+
+        <!-- 3) Grupo de opções (radio) -->
+        <fieldset>
+            <legend>Turno de Estudo</legend>
+            <div>
+                <input type="radio" id="manha" name="turno" value="manha" required>
+                <label for="manha">Manhã</label>
+            </div>
+            <div>
+                <input type="radio" id="tarde" name="turno" value="tarde">
+                <label for="tarde">Tarde</label>
+            </div>
+            <div>
+                <input type="radio" id="noite" name="turno" value="noite">
+                <label for="noite">Noite</label>
+            </div>
+        </fieldset>
+
+        <!-- 4) Múltipla escolha (checkbox) -->
+        <fieldset>
+            <legend>Áreas de Interesse</legend>
+            <div>
+                <input type="checkbox" id="programacao" name="interesses" value="programacao">
+                <label for="programacao">Programação</label>
+            </div>
+            <div>
+                <input type="checkbox" id="banco_dados" name="interesses" value="banco_dados">
+                <label for="banco_dados">Banco de Dados</label>
+            </div>
+            <div>
+                <input type="checkbox" id="redes" name="interesses" value="redes">
+                <label for="redes">Redes</label>
+            </div>
+            <div>
+                <input type="checkbox" id="design" name="interesses" value="design">
+                <label for="design">Design</label>
+            </div>
+        </fieldset>
+
+        <!-- 5) Caixa de seleção (select) -->
+        <fieldset>
+            <legend>Curso de Interesse</legend>
+            <div>
+                <label for="curso">Selecione o curso:</label>
+                <select id="curso" name="curso" required>
+                    <option value="">Selecione uma opção</option>
+                    <option value="informatica">Informática</option>
+                    <option value="eletrotecnica">Eletrotécnica</option>
+                    <option value="mecanica">Mecânica</option>
+                    <option value="administracao">Administração</option>
+                </select>
+            </div>
+        </fieldset>
+
+        <!-- 6) Upload de arquivo -->
+        <fieldset>
+            <legend>Documentos</legend>
+            <div>
+                <label for="curriculo">Currículo (PDF):</label>
+                <input type="file" id="curriculo" name="curriculo" accept=".pdf" 
+                       title="Selecione um arquivo PDF com seu currículo">
+            </div>
+        </fieldset>
+
+        <!-- 7) Senha e confirmação -->
+        <fieldset>
+            <legend>Segurança</legend>
+            <div>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" required 
+                       minlength="6" maxlength="20"
+                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d@$!%*?&]{6,}$"
+                       title="A senha deve ter pelo menos 6 caracteres, incluindo maiúscula, minúscula e número">
+            </div>
+            
+            <div>
+                <label for="confirmar_senha">Confirmar Senha:</label>
+                <input type="password" id="confirmar_senha" name="confirmar_senha" required 
+                       minlength="6" maxlength="20"
+                       title="Digite a mesma senha para confirmação">
+            </div>
+        </fieldset>
+
+        <!-- 8) Data e hora -->
+        <fieldset>
+            <legend>Informações Pessoais</legend>
+            <div>
+                <label for="data_nascimento">Data de Nascimento:</label>
+                <input type="date" id="data_nascimento" name="data_nascimento" required 
+                       title="Selecione sua data de nascimento">
+            </div>
+            
+            <div>
+                <label for="horario_atendimento">Horário de Atendimento Preferido:</label>
+                <input type="time" id="horario_atendimento" name="horario_atendimento" 
+                       title="Selecione seu horário preferido para atendimento">
+            </div>
+        </fieldset>
+
+        <!-- 9) Campo com aria-label para reforçar acessibilidade -->
+        <fieldset>
+            <legend>Informações Adicionais</legend>
+            <div>
+                <label for="observacoes">Observações:</label>
+                <textarea id="observacoes" name="observacoes" rows="3" cols="50" 
+                          aria-label="Campo para observações adicionais sobre sua solicitação"
+                          title="Digite qualquer observação adicional"></textarea>
+            </div>
+        </fieldset>
+
+        <!-- Botão de envio -->
+        <div>
+            <button type="submit">Enviar Formulário</button>
+            <button type="reset">Limpar Formulário</button>
+        </div>
+
+    </form>
+
+    <script>
+        // Validação adicional para confirmação de senha
+        document.getElementById('confirmar_senha').addEventListener('input', function() {
+            const senha = document.getElementById('senha').value;
+            const confirmarSenha = this.value;
+            
+            if (senha !== confirmarSenha) {
+                this.setCustomValidity('As senhas não coincidem');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Validação do telefone em tempo real
+        document.getElementById('telefone').addEventListener('input', function() {
+            const telefone = this.value;
+            const pattern = /^\([0-9]{2}\) [0-9]{5}-[0-9]{4}$/;
+            
+            if (telefone && !pattern.test(telefone)) {
+                this.setCustomValidity('Digite o telefone no formato (XX) XXXXX-XXXX');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+    </script>
+
+</body>
+</html>
