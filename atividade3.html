@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha de Anamnese</title>
+</head>
+<body>
+    <header>
+        <h1>Ficha de Anamnese</h1>
+        <p><strong>Instruções:</strong> Preencha todos os campos marcados com asterisco (*). Esta informação é confidencial e será utilizada apenas para fins médicos.</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#dados-pessoais">Dados Pessoais</a></li>
+            <li><a href="#historico-saude">Histórico de Saúde</a></li>
+            <li><a href="#habitos-vida">Hábitos e Estilo de Vida</a></li>
+            <li><a href="#medicoes">Medições</a></li>
+            <li><a href="#consentimento">Consentimento</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <form id="ficha-anamnese" action="#" method="post">
+            
+            <!-- Dados Pessoais -->
+            <section id="dados-pessoais">
+                <h2>Dados Pessoais</h2>
+                
+                <div>
+                    <label for="nome-completo">Nome completo *</label>
+                    <input type="text" id="nome-completo" name="nome-completo" required aria-label="Nome completo do paciente">
+                </div>
+
+                <div>
+                    <label for="data-nascimento">Data de nascimento *</label>
+                    <input type="date" id="data-nascimento" name="data-nascimento" required aria-label="Data de nascimento do paciente">
+                </div>
+
+                <div>
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" name="cpf" pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}" placeholder="000.000.000-00" aria-label="CPF do paciente">
+                </div>
+
+                <div>
+                    <label for="telefone">Telefone *</label>
+                    <input type="tel" id="telefone" name="telefone" required pattern="[0-9]{2} [0-9]{4,5}-[0-9]{4}" placeholder="11 99999-9999" aria-label="Número de telefone do paciente">
+                </div>
+
+                <div>
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" aria-label="Endereço de e-mail do paciente">
+                </div>
+
+                <div>
+                    <label for="endereco">Endereço</label>
+                    <textarea id="endereco" name="endereco" rows="3" aria-label="Endereço completo do paciente"></textarea>
+                </div>
+            </section>
+
+            <!-- Histórico de Saúde -->
+            <section id="historico-saude">
+                <h2>Histórico de Saúde</h2>
+                
+                <div>
+                    <label for="alergias">Alergias *</label>
+                    <select id="alergias" name="alergias" required aria-label="Paciente possui alergias">
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                    </select>
+                </div>
+
+                <div id="descricao-alergias" style="display: none;">
+                    <label for="descricao-alergias-texto">Se sim, descreva as alergias:</label>
+                    <textarea id="descricao-alergias-texto" name="descricao-alergias" rows="3" aria-label="Descrição das alergias do paciente"></textarea>
+                </div>
+
+                <div>
+                    <fieldset>
+                        <legend>Doenças crônicas</legend>
+                        <label><input type="checkbox" name="doencas-cronicas" value="hipertensao"> Hipertensão</label>
+                        <label><input type="checkbox" name="doencas-cronicas" value="diabetes"> Diabetes</label>
+                        <label><input type="checkbox" name="doencas-cronicas" value="asma"> Asma</label>
+                        <label><input type="checkbox" name="doencas-cronicas" value="outras"> Outras</label>
+                    </fieldset>
+                </div>
+
+                <div>
+                    <h3>Medicamentos em uso</h3>
+                    <table border="1" cellpadding="5" cellspacing="0">
+                        <caption>Lista de medicamentos (até 3 tipos)</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome do Medicamento</th>
+                                <th scope="col">Dosagem</th>
+                                <th scope="col">Frequência</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="medicamento1-nome" aria-label="Nome do primeiro medicamento"></td>
+                                <td><input type="text" name="medicamento1-dosagem" aria-label="Dosagem do primeiro medicamento"></td>
+                                <td><input type="text" name="medicamento1-frequencia" aria-label="Frequência do primeiro medicamento"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="medicamento2-nome" aria-label="Nome do segundo medicamento"></td>
+                                <td><input type="text" name="medicamento2-dosagem" aria-label="Dosagem do segundo medicamento"></td>
+                                <td><input type="text" name="medicamento2-frequencia" aria-label="Frequência do segundo medicamento"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="medicamento3-nome" aria-label="Nome do terceiro medicamento"></td>
+                                <td><input type="text" name="medicamento3-dosagem" aria-label="Dosagem do terceiro medicamento"></td>
+                                <td><input type="text" name="medicamento3-frequencia" aria-label="Frequência do terceiro medicamento"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3>Cirurgias/Internações anteriores</h3>
+                    <table border="1" cellpadding="5" cellspacing="0">
+                        <caption>Histórico de cirurgias e internações (até 3 registros)</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col">Tipo de Procedimento</th>
+                                <th scope="col">Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="text" name="cirurgia1-tipo" aria-label="Tipo da primeira cirurgia ou internação"></td>
+                                <td><input type="date" name="cirurgia1-data" aria-label="Data da primeira cirurgia ou internação"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="cirurgia2-tipo" aria-label="Tipo da segunda cirurgia ou internação"></td>
+                                <td><input type="date" name="cirurgia2-data" aria-label="Data da segunda cirurgia ou internação"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="cirurgia3-tipo" aria-label="Tipo da terceira cirurgia ou internação"></td>
+                                <td><input type="date" name="cirurgia3-data" aria-label="Data da terceira cirurgia ou internação"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <label for="queixa-principal">Queixa principal * (Motivo da consulta)</label>
+                    <textarea id="queixa-principal" name="queixa-principal" rows="4" required aria-label="Queixa principal e motivo da consulta"></textarea>
+                </div>
+            </section>
+
+            <!-- Hábitos e Estilo de Vida -->
+            <section id="habitos-vida">
+                <h2>Hábitos e Estilo de Vida</h2>
+                
+                <div>
+                    <label for="atividade-fisica">Atividade física</label>
+                    <select id="atividade-fisica" name="atividade-fisica" aria-label="Nível de atividade física do paciente">
+                        <option value="">Selecione uma opção</option>
+                        <option value="nenhuma">Nenhuma</option>
+                        <option value="leve">Leve</option>
+                        <option value="moderada">Moderada</option>
+                        <option value="intensa">Intensa</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="tabagismo">Tabagismo</label>
+                    <select id="tabagismo" name="tabagismo" aria-label="Hábito de tabagismo do paciente">
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">Não</option>
+                        <option value="sim">Sim</option>
+                        <option value="ex-fumante">Ex-fumante</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="etilico">Etílico</label>
+                    <select id="etilico" name="etilico" aria-label="Consumo de álcool do paciente">
+                        <option value="">Selecione uma opção</option>
+                        <option value="nao">Não</option>
+                        <option value="social">Social</option>
+                        <option value="frequente">Frequente</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="qualidade-sono">Qualidade do sono</label>
+                    <select id="qualidade-sono" name="qualidade-sono" aria-label="Qualidade do sono do paciente">
+                        <option value="">Selecione uma opção</option>
+                        <option value="ruim">Ruim</option>
+                        <option value="regular">Regular</option>
+                        <option value="boa">Boa</option>
+                        <option value="muito-boa">Muito boa</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Medições -->
+            <section id="medicoes">
+                <h2>Medições</h2>
+                
+                <div>
+                    <label for="altura">Altura (cm)</label>
+                    <input type="number" id="altura" name="altura" min="50" max="250" aria-label="Altura do paciente em centímetros">
+                </div>
+
+                <div>
+                    <label for="peso">Peso (kg)</label>
+                    <input type="number" id="peso" name="peso" min="1" max="500" step="0.1" aria-label="Peso do paciente em quilogramas">
+                </div>
+
+                <div>
+                    <label for="pressao-sistolica">Pressão arterial sistólica (mmHg)</label>
+                    <input type="number" id="pressao-sistolica" name="pressao-sistolica" min="50" max="300" aria-label="Pressão arterial sistólica em mmHg">
+                </div>
+
+                <div>
+                    <label for="pressao-diastolica">Pressão arterial diastólica (mmHg)</label>
+                    <input type="number" id="pressao-diastolica" name="pressao-diastolica" min="30" max="200" aria-label="Pressão arterial diastólica em mmHg">
+                </div>
+
+                <div>
+                    <label for="frequencia-cardiaca">Frequência cardíaca (bpm)</label>
+                    <input type="number" id="frequencia-cardiaca" name="frequencia-cardiaca" min="30" max="200" aria-label="Frequência cardíaca em batimentos por minuto">
+                </div>
+            </section>
+
+            <!-- Consentimento -->
+            <section id="consentimento">
+                <h2>Consentimento</h2>
+                
+                <div>
+                    <label>
+                        <input type="checkbox" name="termos" required aria-label="Concordo com o uso dos meus dados">
+                        Concordo com o uso dos meus dados para fins médicos e de tratamento *
+                    </label>
+                </div>
+
+                <div>
+                    <label for="assinatura">Assinatura (nome completo) *</label>
+                    <input type="text" id="assinatura" name="assinatura" required aria-label="Assinatura digital do paciente">
+                </div>
+
+                <div>
+                    <label for="data-assinatura">Data *</label>
+                    <input type="date" id="data-assinatura" name="data-assinatura" required aria-label="Data da assinatura do termo de consentimento">
+                </div>
+            </section>
+
+            <div>
+                <button type="submit">Enviar Ficha de Anamnese</button>
+                <button type="reset">Limpar Formulário</button>
+            </div>
+        </form>
+    </main>
+
+    <footer>
+    </footer>
+
+    <script>
+        // Script para mostrar/ocultar campo de descrição de alergias
+        document.getElementById('alergias').addEventListener('change', function() {
+            const descricaoDiv = document.getElementById('descricao-alergias');
+            const descricaoTexto = document.getElementById('descricao-alergias-texto');
+            
+            if (this.value === 'sim') {
+                descricaoDiv.style.display = 'block';
+                descricaoTexto.required = true;
+            } else {
+                descricaoDiv.style.display = 'none';
+                descricaoTexto.required = false;
+                descricaoTexto.value = '';
+            }
+        });
+
+        // Validação adicional para CPF
+        document.getElementById('cpf').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d)/, '$1.$2');
+            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+            this.value = value;
+        });
+
+        // Validação adicional para telefone
+        document.getElementById('telefone').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length <= 10) {
+                value = value.replace(/(\d{2})(\d{4})(\d{4})/, '$1 $2-$3');
+            } else {
+                value = value.replace(/(\d{2})(\d{5})(\d{4})/, '$1 $2-$3');
+            }
+            this.value = value;
+        });
+    </script>
+</body>
+</html>
