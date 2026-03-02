@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Lava Jato</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🚗 Sistema Lava Jato</h1>
+
+    <div class="form-group">
+        <input type="text" id="cliente" placeholder="Nome do Cliente">
+        <input type="text" id="veiculo" placeholder="Veículo">
+        
+        <select id="tipo">
+            <option value="">Tipo de Lavagem</option>
+            <option>Simples</option>
+            <option>Completa</option>
+            <option>Polimento</option>
+        </select>
+
+        <input type="number" id="valor" placeholder="Valor (R$)">
+    </div>
+
+    <button class="btn-add" onclick="salvar()">Salvar</button>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Veículo</th>
+                <th>Tipo</th>
+                <th>Valor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="tabela"></tbody>
+    </table>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
