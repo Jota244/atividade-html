@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#fff7ec">
+<title>Marias Pipoca Gourmet — Cardápio & Pedido</title>
+
+<!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. VARIÁVEIS DE TEMA (claro / escuro)
+   ============================================================ */
+:root{
+  --bg:#fff7ec;
+  --surface:#ffffff;
+  --text:#3a2217;
+  --muted:#7a5a49;
+  --accent:#e0457b;
+  --accent2:#f2a33a;
+  --line:#f0dcc5;
+  --on-accent:#fff;
+  --shadow:0 10px 30px rgba(58,34,23,.12);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#1f130d; --surface:#2b1b13; --text:#fbeedd;
+    --muted:#c9a78f; --accent:#ff6b9d; --accent2:#f5b04c;
+    --line:#443022; --shadow:0 10px 30px rgba(0,0,0,.4);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#1f130d; --surface:#2b1b13; --text:#fbeedd;
+  --muted:#c9a78f; --accent:#ff6b9d; --accent2:#f5b04c;
+  --line:#443022; --shadow:0 10px 30px rgba(0,0,0,.4);
+  color-scheme:dark;
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.6; -webkit-font-smoothing:antialiased;
+  padding-bottom:env(safe-area-inset-bottom);
+}
+h1,h2,h3{font-family:"Fredoka","Trebuchet MS",system-ui,sans-serif;line-height:1.15;margin:0}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img{max-width:100%;display:block}
+.wrap{max-width:1000px;margin:0 auto;padding:0 20px}
+
+/* ============================================================
+   3. HEADER
+   ============================================================ */
+.site-header{
+  position:sticky; top:0; z-index:20;
+  background:color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-family:"Fredoka",sans-serif;font-weight:700;font-size:1.25rem;text-decoration:none;color:var(--text)}
+.logo span{color:var(--accent)}
+.main-nav a{margin-left:16px;text-decoration:none;font-weight:700;font-size:.95rem;color:var(--muted)}
+.main-nav a:hover{color:var(--accent)}
+
+/* ============================================================
+   4. HERO
+   ============================================================ */
+.hero{padding:48px 0 32px;text-align:center}
+.hero .emoji{font-size:3.5rem;letter-spacing:6px}
+.hero h1{font-size:clamp(2rem,7vw,3.4rem);margin:10px 0}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p{max-width:520px;margin:0 auto 22px;color:var(--muted);font-size:1.05rem}
+.btn{
+  display:inline-block; background:var(--accent); color:var(--on-accent);
+  padding:14px 26px; border-radius:999px; font-weight:800; font-size:1rem;
+  text-decoration:none; box-shadow:0 5px 0 rgba(0,0,0,.15);
+  transition:transform .1s ease, box-shadow .1s ease;
+}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.btn.alt{background:transparent;color:var(--text);border:2px solid var(--line);box-shadow:none;margin-left:8px}
+.btn.wide{display:block;width:100%;text-align:center}
+.btn.whatsapp{background:#25d366;color:#fff;box-shadow:0 5px 0 rgba(18,140,70,.4)}
+
+/* ============================================================
+   5. SEÇÕES & TÍTULOS
+   ============================================================ */
+section{padding:36px 0}
+.section-title{text-align:center;margin-bottom:24px}
+.section-title h2{font-size:clamp(1.6rem,5vw,2.2rem)}
+.section-title p{color:var(--muted);margin:6px 0 0}
+.notice{
+  display:inline-block;margin-top:10px;font-size:.8rem;font-weight:700;
+  color:var(--accent2);background:color-mix(in srgb, var(--accent2) 14%, transparent);
+  border:1px solid color-mix(in srgb, var(--accent2) 40%, transparent);
+  padding:3px 12px;border-radius:999px;
+}
+
+/* ============================================================
+   6. CARDÁPIO — GRID DE PRODUTOS
+   ============================================================ */
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
+.product-card{
+  background:var(--surface); border:1px solid var(--line); border-radius:22px;
+  padding:20px; display:flex; flex-direction:column; gap:10px;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.product-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.product-card .ico{font-size:2.4rem;line-height:1}
+.product-card .tag{
+  align-self:flex-start; background:var(--accent2); color:#3a2217;
+  font-size:.7rem; font-weight:800; padding:2px 10px; border-radius:999px;
+}
+.product-card h3{font-size:1.2rem}
+.product-card .desc{margin:0;color:var(--muted);font-size:.92rem;flex:1}
+.product-card .price{font-weight:800;font-size:1.25rem;color:var(--accent)}
+.product-card select{
+  width:100%; padding:10px 12px; border-radius:12px; font-family:inherit;
+  font-size:.92rem; font-weight:700; color:var(--text);
+  background:var(--bg); border:1.5px solid var(--line);
+}
+.qty-row{display:flex;align-items:center;gap:10px}
+.qty-stepper{
+  display:flex; align-items:center; border:1.5px solid var(--line);
+  border-radius:999px; overflow:hidden; background:var(--bg);
+}
+.qty-stepper button{
+  width:38px; height:38px; font-size:1.2rem; font-weight:800; color:var(--accent);
+  display:grid; place-items:center;
+}
+.qty-stepper button:active{background:color-mix(in srgb, var(--accent) 12%, transparent)}
+.qty-stepper .qty-value{min-width:28px;text-align:center;font-weight:800}
+.add-btn{
+  flex:1; background:var(--accent); color:var(--on-accent);
+  padding:11px 14px; border-radius:999px; font-weight:800; font-size:.92rem;
+  box-shadow:0 3px 0 rgba(0,0,0,.15);
+}
+.add-btn:active{transform:translateY(2px);box-shadow:none}
+.add-btn.added{background:#25d366;box-shadow:0 3px 0 rgba(18,140,70,.4)}
+
+/* ============================================================
+   7. COMO PEDIR (passo a passo)
+   ============================================================ */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;counter-reset:s}
+.step{
+  position:relative; padding:18px 18px 18px 62px;
+  background:var(--surface); border:1px solid var(--line); border-radius:18px;
+}
+.step::before{
+  counter-increment:s; content:counter(s);
+  position:absolute; left:16px; top:18px; width:32px; height:32px;
+  border-radius:50%; background:var(--accent); color:var(--on-accent);
+  display:grid; place-items:center; font-weight:800; font-family:"Fredoka",sans-serif;
+}
+.step b{display:block;font-size:1.02rem}
+.step span{color:var(--muted);font-size:.9rem}
+
+/* ============================================================
+   8. CTA CONTATO
+   ============================================================ */
+.cta-box{
+  background:var(--accent); color:var(--on-accent); border-radius:28px;
+  padding:36px 20px; text-align:center;
+}
+.cta-box h2{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:6px}
+.cta-box p{margin:0 0 18px;opacity:.95}
+.cta-box .btn{background:var(--surface);color:var(--text)}
+footer{text-align:center;padding:28px 20px 90px;color:var(--muted);font-size:.88rem}
+
+/* ============================================================
+   9. CARRINHO — BOTÃO FLUTUANTE
+   ============================================================ */
+.cart-fab{
+  position:fixed; right:18px;
+  bottom:calc(18px + env(safe-area-inset-bottom));
+  z-index:40; width:60px; height:60px; border-radius:50%;
+  background:var(--accent); color:var(--on-accent);
+  box-shadow:var(--shadow); display:grid; place-items:center;
+  transition:transform .15s ease;
+}
+.cart-fab:active{transform:scale(.92)}
+.cart-fab svg{width:28px;height:28px}
+.cart-badge{
+  position:absolute; top:-4px; right:-4px; min-width:22px; height:22px;
+  padding:0 6px; border-radius:999px; background:var(--accent2); color:#3a2217;
+  font-size:.75rem; font-weight:800; display:grid; place-items:center;
+  border:2px solid var(--bg);
+}
+.cart-badge.hidden{display:none}
+
+/* ============================================================
+   10. CARRINHO — GAVETA (drawer / bottom-sheet)
+   ============================================================ */
+.cart-overlay{
+  position:fixed; inset:0; z-index:50; background:rgba(0,0,0,.45);
+  opacity:0; pointer-events:none; transition:opacity .25s ease;
+}
+.cart-overlay.open{opacity:1;pointer-events:auto}
+.cart-drawer{
+  position:fixed; z-index:51; background:var(--surface);
+  display:flex; flex-direction:column;
+  transition:transform .3s cubic-bezier(.32,.72,0,1);
+}
+/* Desktop: gaveta pela direita */
+.cart-drawer{
+  top:0; right:0; height:100%; width:min(400px,92vw);
+  transform:translateX(100%);
+  border-radius:24px 0 0 24px; box-shadow:-10px 0 40px rgba(0,0,0,.2);
+}
+.cart-overlay.open .cart-drawer{transform:translateX(0)}
+.cart-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 20px 14px; border-bottom:1px solid var(--line);
+}
+.cart-head h3{font-size:1.3rem}
+.cart-close{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.cart-close:hover{background:var(--bg);color:var(--text)}
+.cart-body{flex:1;overflow-y:auto;padding:14px 20px;display:flex;flex-direction:column;gap:12px}
+.cart-empty{text-align:center;color:var(--muted);padding:40px 10px}
+.cart-empty .ico{font-size:2.6rem;margin-bottom:8px}
+.cart-item{
+  display:grid; grid-template-columns:1fr auto; gap:6px 10px;
+  padding:12px; border:1px solid var(--line); border-radius:16px; background:var(--bg);
+}
+.cart-item .name{font-weight:800;font-size:.95rem;line-height:1.3}
+.cart-item .flavor{font-size:.82rem;color:var(--muted)}
+.cart-item .item-total{font-weight:800;white-space:nowrap}
+.cart-item .qty-stepper button{width:30px;height:30px;font-size:1rem}
+.cart-item .qty-value{min-width:22px;font-size:.9rem}
+.cart-item .remove{
+  grid-column:1/-1; justify-self:end; font-size:.78rem; font-weight:700;
+  color:var(--muted); text-decoration:underline;
+}
+.cart-foot{padding:16px 20px calc(18px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;flex-direction:column;gap:10px}
+.field label{display:block;font-size:.8rem;font-weight:800;color:var(--muted);margin-bottom:4px}
+.field input{
+  width:100%; padding:11px 14px; border-radius:12px; font-family:inherit;
+  font-size:.95rem; border:1.5px solid var(--line); background:var(--bg); color:var(--text);
+}
+.total-row{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:1.15rem}
+.total-row .total-value{color:var(--accent);font-size:1.3rem}
+
+/* ============================================================
+   11. RESPONSIVO — CELULAR
+   ============================================================ */
+@media (max-width:640px){
+  .main-nav a:not(.keep){display:none}
+  .btn.alt{margin:10px 0 0}
+  /* Carrinho vira bottom-sheet no celular */
+  .cart-drawer{
+    top:auto; bottom:0; left:0; right:0; width:100%; height:auto;
+    max-height:88vh; transform:translateY(100%);
+    border-radius:24px 24px 0 0;
+  }
+  .cart-overlay.open .cart-drawer{transform:translateY(0)}
+  .menu-grid{grid-template-columns:1fr}
+  .hero{padding:32px 0 24px}
+  section{padding:28px 0}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="#">Marias Pipoca <span>Gourmet</span></a>
+    <nav class="main-nav">
+      <a href="#cardapio">Cardápio</a>
+      <a href="#pedido">Como pedir</a>
+      <a class="keep" href="#contato">Contato</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- ================= HERO ================= -->
+  <div class="wrap hero">
+    <div class="emoji">🍿🍩🍫</div>
+    <h1>Doces que dão <em>vontade</em> de pedir mais</h1>
+    <p>Pipoca gourmet crocante, mini donuts, brownies recheados e bolos de pote. Feitos com carinho, do jeitinho que você gosta.</p>
+    <a class="btn" href="#cardapio">Escolher no cardápio</a>
+    <a class="btn alt" href="#pedido">Como pedir</a>
+  </div>
+
+  <!-- ================= CARDÁPIO (renderizado pelo JS) ================= -->
+  <section id="cardapio">
+    <div class="wrap">
+      <div class="section-title">
+        <h2>Nosso cardápio</h2>
+        <p>Escolha o sabor, a quantidade e adicione ao pedido.</p>
+        <br><span class="notice">Preços de exemplo — altere facilmente no código</span>
+      </div>
+      <div class="menu-grid" id="menuGrid"></div>
+    </div>
+  </section>
+
+  <!-- ================= COMO PEDIR ================= -->
+  <section id="pedido">
+    <div class="wrap">
+      <div class="section-title"><h2>Como pedir</h2><p>Simples e rápido</p></div>
+      <div class="steps">
+        <div class="step"><b>Escolha</b><span>Veja o cardápio, selecione o sabor e adicione ao carrinho.</span></div>
+        <div class="step"><b>Finalize</b><span>Abra o carrinho, confira o pedido e toque em enviar.</span></div>
+        <div class="step"><b>Receba</b><span>O pedido vai direto para o nosso WhatsApp. Combine retirada ou entrega.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTATO / CTA ================= -->
+  <section id="contato">
+    <div class="wrap">
+      <div class="cta-box">
+        <h2>Bateu a vontade? 🍿</h2>
+        <p>Encomendas para festas, presentes e eventos também.</p>
+        <a class="btn" id="ctaWhats" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>© Marias Pipoca Gourmet · Feito com carinho e açúcar 🍩</footer>
+
+<!-- ================= BOTÃO FLUTUANTE DO CARRINHO ================= -->
+<button class="cart-fab" id="cartFab" aria-label="Abrir carrinho">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+  <span class="cart-badge hidden" id="cartBadge">0</span>
+</button>
+
+<!-- ================= GAVETA DO CARRINHO ================= -->
+<div class="cart-overlay" id="cartOverlay">
+  <aside class="cart-drawer" role="dialog" aria-label="Carrinho de pedidos">
+    <div class="cart-head">
+      <h3>Seu pedido 🛒</h3>
+      <button class="cart-close" id="cartClose" aria-label="Fechar carrinho">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-body" id="cartBody"></div>
+    <div class="cart-foot" id="cartFoot">
+      <div class="field">
+        <label for="clientName">Seu nome (opcional)</label>
+        <input type="text" id="clientName" placeholder="Como podemos te chamar?">
+      </div>
+      <div class="field">
+        <label for="clientNote">Endereço / observação (opcional)</label>
+        <input type="text" id="clientNote" placeholder="Ex: Rua das Flores, 123 — entregar à tarde">
+      </div>
+      <div class="total-row"><span>Total</span><span class="total-value" id="cartTotal">R$ 0,00</span></div>
+      <button class="btn whatsapp wide" id="checkoutBtn">
+        Finalizar pedido no WhatsApp
+      </button>
+    </div>
+  </aside>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================================
+   ⚙️  CONFIGURAÇÃO — EDITE AQUI SEM MEDO!
+   ============================================================
+   - whatsapp: número com DDI + DDD, só dígitos (ex: 5581985786010)
+   - products: cada produto tem nome, descrição, preço, emoji,
+     tag (opcional) e lista de sabores. Para remover um produto,
+     apague o bloco {} correspondente. Para adicionar, copie um
+     bloco e altere os valores.
+   ============================================================ */
+var CONFIG = {
+  whatsapp: "5581985786010",
+  storeName: "Marias Pipoca Gourmet",
+  products: [
+    {
+      id: "pipoca",
+      name: "Pipoca gourmet",
+      desc: "Estourada na hora, crocante e cobertinha de sabor.",
+      price: 15.00,
+      emoji: "🍿",
+      tag: "",
+      flavors: ["Caramelo","Doce de leite","Chocolate","Brigadeiro","Queijo","Cheddar"]
+    },
+    {
+      id: "mini-donuts",
+      name: "Mini donuts",
+      desc: "Fofinhos e fresquinhos, perfeitos pra beliscar.",
+      price: 12.00,
+      emoji: "🍩",
+      tag: "Normal",
+      flavors: ["Açúcar e canela","Cobertura de chocolate","Granulado"]
+    },
+    {
+      id: "mini-donuts-recheados",
+      name: "Mini donuts recheados",
+      desc: "Uma explosão de recheio a cada mordida.",
+      price: 18.00,
+      emoji: "🍩",
+      tag: "Recheado",
+      flavors: ["Brigadeiro","Doce de leite","Creme de avelã","Leite Ninho"]
+    },
+    {
+      id: "brownie",
+      name: "Brownie recheado",
+      desc: "Casquinha crocante por fora, macio e cheio de recheio por dentro.",
+      price: 14.00,
+      emoji: "🍫",
+      tag: "",
+      flavors: ["Ninho","Doce de leite","Creme de avelã","Beijinho"]
+    },
+    {
+      id: "bolo-pote",
+      name: "Bolo de pote",
+      desc: "Camadas de bolo fofinho e recheio cremoso, prontinho pra comer de colher.",
+      price: 16.00,
+      emoji: "🍰",
+      tag: "",
+      flavors: ["Chocolate com morango","Ninho com morango","Cenoura com brigadeiro","Prestígio"]
+    }
+  ]
+};
+
+/* ============================================================
+   🛒  ESTADO DO CARRINHO
+   Itens: { key, id, name, emoji, flavor, price, qty }
+   A chave é id + "|" + sabor, pra permitir mesmo produto com
+   sabores diferentes em linhas separadas.
+   ============================================================ */
+var STORAGE_KEY = "marias_pipoca_cart_v1";
+var cart = loadCart();
+
+function loadCart(){
+  try{
+    var raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  }catch(e){ return []; }
+}
+function saveCart(){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); }catch(e){}
+}
+function findItem(key){
+  for(var i=0;i<cart.length;i++){ if(cart[i].key===key) return cart[i]; }
+  return null;
+}
+function cartCount(){
+  var n=0; for(var i=0;i<cart.length;i++) n+=cart[i].qty; return n;
+}
+function cartTotal(){
+  var t=0; for(var i=0;i<cart.length;i++) t+=cart[i].price*cart[i].qty; return t;
+}
+function fmt(v){
+  return v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+}
+
+/* ============================================================
+   🎨  RENDERIZAÇÃO DO CARDÁPIO
+   ============================================================ */
+var menuGrid = document.getElementById("menuGrid");
+
+CONFIG.products.forEach(function(p){
+  var card = document.createElement("article");
+  card.className = "product-card";
+
+  var flavorOptions = p.flavors.map(function(f){
+    return '<option value="'+f+'">'+f+'</option>';
+  }).join("");
+
+  card.innerHTML =
+    (p.tag ? '<span class="tag">'+p.tag+'</span>' : '') +
+    '<div class="ico">'+p.emoji+'</div>' +
+    '<h3>'+p.name+'</h3>' +
+    '<p class="desc">'+p.desc+'</p>' +
+    '<div class="price">'+fmt(p.price)+' <span style="font-size:.75rem;font-weight:700;color:var(--muted)">/ unidade</span></div>' +
+    '<select aria-label="Sabor de '+p.name+'">'+flavorOptions+'</select>' +
+    '<div class="qty-row">' +
+      '<div class="qty-stepper">' +
+        '<button type="button" data-act="minus" aria-label="Diminuir quantidade">−</button>' +
+        '<span class="qty-value">1</span>' +
+        '<button type="button" data-act="plus" aria-label="Aumentar quantidade">+</button>' +
+      '</div>' +
+      '<button type="button" class="add-btn">Adicionar</button>' +
+    '</div>';
+
+  /* Controles de quantidade do card (estado local do card) */
+  var qtyVal = card.querySelector(".qty-value");
+  var qty = 1;
+  card.querySelector('[data-act="minus"]').addEventListener("click", function(){
+    if(qty>1){ qty--; qtyVal.textContent = qty; }
+  });
+  card.querySelector('[data-act="plus"]').addEventListener("click", function(){
+    qty++; qtyVal.textContent = qty;
+  });
+
+  /* Botão adicionar ao carrinho */
+  var addBtn = card.querySelector(".add-btn");
+  var select = card.querySelector("select");
+  addBtn.addEventListener("click", function(){
+    var flavor = select.value;
+    var key = p.id + "|" + flavor;
+    var item = findItem(key);
+    if(item){ item.qty += qty; }
+    else{
+      cart.push({ key:key, id:p.id, name:p.name, emoji:p.emoji, flavor:flavor, price:p.price, qty:qty });
+    }
+    saveCart();
+    renderCart();
+    /* Feedback visual no botão */
+    var original = addBtn.textContent;
+    addBtn.textContent = "✓ Adicionado!";
+    addBtn.classList.add("added");
+    setTimeout(function(){
+      addBtn.textContent = original;
+      addBtn.classList.remove("added");
+    }, 1200);
+    /* Zera quantidade do card de volta pra 1 */
+    qty = 1; qtyVal.textContent = "1";
+  });
+
+  menuGrid.appendChild(card);
+});
+
+/* ============================================================
+   🛒  RENDERIZAÇÃO DO CARRINHO
+   ============================================================ */
+var cartBody  = document.getElementById("cartBody");
+var cartFoot  = document.getElementById("cartFoot");
+var cartBadge = document.getElementById("cartBadge");
+var cartTotalEl = document.getElementById("cartTotal");
+
+function renderCart(){
+  /* Badge do botão flutuante */
+  var count = cartCount();
+  cartBadge.textContent = count;
+  cartBadge.classList.toggle("hidden", count===0);
+
+  /* Total */
+  cartTotalEl.textContent = fmt(cartTotal());
+
+  /* Esconde rodapé (total + finalizar) se carrinho vazio */
+  cartFoot.style.display = count===0 ? "none" : "flex";
+
+  if(count===0){
+    cartBody.innerHTML =
+      '<div class="cart-empty">' +
+        '<div class="ico">🛒</div>' +
+        '<div>Seu carrinho está vazio.<br>Adicione algo gostoso do cardápio!</div>' +
+      '</div>';
+    return;
+  }
+
+  cartBody.innerHTML = "";
+  cart.forEach(function(item){
+    var row = document.createElement("div");
+    row.className = "cart-item";
+    row.innerHTML =
+      '<div>' +
+        '<div class="name">'+item.emoji+' '+item.name+'</div>' +
+        '<div class="flavor">Sabor: '+item.flavor+' · '+fmt(item.price)+' cada</div>' +
+      '</div>' +
+      '<div class="item-total">'+fmt(item.price*item.qty)+'</div>' +
+      '<div class="qty-stepper">' +
+        '<button type="button" data-act="minus" aria-label="Diminuir">−</button>' +
+        '<span class="qty-value">'+item.qty+'</span>' +
+        '<button type="button" data-act="plus" aria-label="Aumentar">+</button>' +
+      '</div>' +
+      '<button type="button" class="remove" data-act="remove">Remover</button>';
+
+    row.querySelector('[data-act="minus"]').addEventListener("click", function(){
+      item.qty--;
+      if(item.qty<=0){ cart = cart.filter(function(i){return i.key!==item.key;}); }
+      saveCart(); renderCart();
+    });
+    row.querySelector('[data-act="plus"]').addEventListener("click", function(){
+      item.qty++; saveCart(); renderCart();
+    });
+    row.querySelector('[data-act="remove"]').addEventListener("click", function(){
+      cart = cart.filter(function(i){return i.key!==item.key;});
+      saveCart(); renderCart();
+    });
+
+    cartBody.appendChild(row);
+  });
+}
+
+/* ============================================================
+   📱  ABRIR / FECHAR CARRINHO
+   ============================================================ */
+var overlay = document.getElementById("cartOverlay");
+document.getElementById("cartFab").addEventListener("click", function(){
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+});
+function closeCart(){
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.getElementById("cartClose").addEventListener("click", closeCart);
+overlay.addEventListener("click", function(e){ if(e.target===overlay) closeCart(); });
+document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeCart(); });
+
+/* ============================================================
+   💬  FINALIZAR PEDIDO → WHATSAPP
+   Monta a mensagem com o resumo do pedido e abre o WhatsApp.
+   ============================================================ */
+document.getElementById("checkoutBtn").addEventListener("click", function(){
+  if(cart.length===0) return;
+
+  var lines = ["Olá! Quero fazer um pedido:", ""];
+  lines.push("*PEDIDO:*");
+  cart.forEach(function(item){
+    lines.push("• "+item.qty+"x "+item.emoji+" "+item.name+" ("+item.flavor+") — "+fmt(item.price*item.qty));
+  });
+  lines.push("");
+  lines.push("*Total: "+fmt(cartTotal())+"*");
+
+  var name = document.getElementById("clientName").value.trim();
+  var note = document.getElementById("clientNote").value.trim();
+  if(name){ lines.push(""); lines.push("Nome: "+name); }
+  if(note){ lines.push("Endereço/Obs: "+note); }
+
+  var message = lines.join("\n");
+  var url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(message);
+  window.open(url, "_blank");
+
+  /* Esvazia o carrinho após enviar */
+  cart = []; saveCart(); renderCart(); closeCart();
+});
+
+/* Link do CTA de contato (mensagem simples, sem pedido) */
+document.getElementById("ctaWhats").href =
+  "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent("Olá! Tenho uma dúvida / quero fazer uma encomenda.");
+
+/* Primeira renderização */
+renderCart();
+
+})();
+</script>
+</body>
+</html>
